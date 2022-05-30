@@ -1,0 +1,35 @@
+<!-- 
+<div><span>User Name </span> <input type="text" [(ngModel)]="userName"></div>
+<div><span>Password </span> <input type="text" [(ngModel)] = "password"></div>
+
+<div><input type="button" value="Login" (click)="Login(userName , password)"></div> -->
+
+
+<div class="container" style="padding:20px;margin-top:160px;margin-left: 60px;background-color: lightblue;">
+
+<div style="margin-left: 150px;">
+    <div>
+        <h4>Login page</h4>
+    </div>
+</div>
+
+<div style="margin-left: 150px;">
+<div class=" row mb-3">
+    <label class="col-sm-2 col-form-label">User Name</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="userName">
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="password">
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-sm-4">
+        <input class="btn btn-primary" type="button" value="Login" (click)="Login(userName , password)">
+    </div>
+</div>
+</div>

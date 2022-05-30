@@ -1,0 +1,123 @@
+<div style="margin-top:20px;margin-left: 60px;">
+    <h5>
+        Flight Booking1
+    </h5>
+    <div *ngIf="!isLoggedIn" style="float:right;margin-right: 140px;margin-top: -40px;">
+        <!-- <h5> <a style="cursor: pointer;" [routerLink]="['Login']">Login</a> </h5> -->
+        <a style="cursor: pointer;color:#0d6efd" (click)="login()">Login</a>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="mb-3" style="margin-left: 15em;">
+        <input type="radio" value="onewayTrip" name="way" [(ngModel)]="flightWayMode"> One trip
+        <input type="radio" value="roundTrip" name="way" [(ngModel)]="flightWayMode"> Round trip
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">From</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" [(ngModel)]="searchFlightDetails.fromPlace">
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">to</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" [(ngModel)]="searchFlightDetails.toPlace">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">OnWard Journey</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" [(ngModel)]="searchFlightDetails.startDateTime">
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Return Journey</label>
+        <div class="col-sm-4">
+            <input type="date" [disabled]="searchFlightDetails.flightWayMode == 'onewayTrip'" class="form-control"
+                [(ngModel)]="searchFlightDetails.endDateTime">
+        </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="searchFlight(searchFlightDetails)">Search Flight</button>
+    <br>
+    <br>
+    <div *ngIf="flightDetailsData.length == 0">
+        <h4>No flights are available</h4>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div *ngIf="flightDetailsData.length > 0">
+        <ul style="list-style-type:none;">
+            <li *ngFor="let bflight of flightDetailsData">
+                <input (click)="evtSelectItem(bflight)" type="checkbox" [(ngModel)]="bflight.isSelected"> &nbsp; &nbsp;
+                <img width="50px" [src]="bflight.flightLogo" style="margin-left:50px">
+                <label style="margin-left:50px">Price Rs {{bflight.price}} </label>
+            </li>
+        </ul>
+
+        <div>
+            <span>Total Price : </span> <b> {{TotalAmount}} </b> &nbsp;&nbsp; |
+            <button class="btn btn-primary" (click)="ContinueBooking()">Contiue to Booking</button>
+            <!-- <button class="btn btn-primary" (click)="triggerModal(modalData)">Add User</button> -->
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <ng-template #modalData let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Add User</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Fight Number</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" [(ngModel)]="user.name">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Password</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" [(ngModel)]="user.password">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">EmailID</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" [(ngModel)]="user.email">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Phone Number</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" [(ngModel)]="user.phonenumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                        (click)="RegisterUser(user);modal.close('Save click')">Register</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
